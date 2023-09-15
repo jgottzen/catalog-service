@@ -1,11 +1,11 @@
 package com.polarbookshop.catalogservice;
 
-import com.polarbookshop.catalogservice.domain.Book;
-import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
+
+import com.polarbookshop.catalogservice.domain.Book;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -103,9 +103,8 @@ class CatalogServiceApplicationTests {
                 .uri("/books/" + bookIsbn)
                 .exchange()
                 .expectStatus().isNotFound()
-                .expectBody(String.class).value(errorMessage ->
-                    assertThat(errorMessage).isEqualTo("The book with ISBN " + bookIsbn + " was not found.")
+                .expectBody(String.class).value(
+                        errorMessage -> assertThat(errorMessage).isEqualTo("The book with ISBN " + bookIsbn + " was not found.")
                 );
     }
-
 }
